@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
             isValid = false;
         }
 
-        // Validate Year of Birth (required, number, >1900 and < current year)
+        // Validate Year of Birth (required, number, >1900 and <= current year)
         const yearValue = document.getElementById('yearOfBirth').value.trim();
         if (!yearValue) {
             document.getElementById('yearError').textContent = 'Year of Birth is required.';
@@ -65,10 +65,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isNaN(yearNum)) {
                 document.getElementById('yearError').textContent = 'Year of Birth must be a valid number.';
                 isValid = false;
-            } else if (yearNum <= 1900 || yearNum >= currentYear) {
+            } else if (yearNum <= 1900 || yearNum > currentYear) {
                 document.getElementById('yearError').textContent =
                     'Year of Birth must be greater than 1900 and less than ' + currentYear + '.';
                 isValid = false;
+            } else if (yearNum.toString() !== yearValue) {
+                document.getElementById('yearError').textContent = 'Your Year of Birth must be an integer.';
+                isValid = false;
+                debugger;
             }
         }
 
